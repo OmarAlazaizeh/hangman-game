@@ -110,7 +110,7 @@ document.addEventListener("click", (e) => {
 
       theDraw.classList.add(`wrong-${wrongAttempts}`);
 
-      document.getElementById("fail").play();
+      // document.getElementById("fail").play();
 
       if (wrongAttempts == 8) {
         endGame("lose");
@@ -118,16 +118,15 @@ document.addEventListener("click", (e) => {
         lettersContainer.classList.add("finished");
       }
     } else {
-      // successAttempts++;
-      document.getElementById("success-2").play();
+      // document.getElementById("success-2").play();
     }
-    console.log(chosenWord.length);
+    // console.log(chosenWord.length);
     guessDivs.forEach((divBox) => {
       if (divBox.innerHTML !== "" || divBox.className === "with-space") {
         successAttempts++;
       }
     });
-    console.log(successAttempts);
+    // console.log(successAttempts);
     if (successAttempts == chosenWord.length) {
       endGame("won");
     }
@@ -137,29 +136,26 @@ document.addEventListener("click", (e) => {
 const overlay = document.getElementById("overlay");
 // end game function
 function endGame(state) {
+  let div = document.createElement("div");
+  let btnReload = document.createElement("button");
+  btnReload.innerHTML = `Play Again`;
   if (state == "lose") {
-    let div = document.createElement("div");
-    // let txt = document.createTextNode(`Game Over, the word is`);
     let word = `Game Over <br> the word is <div>${randomWordName}</div>`;
-
-    // div.appendChild(txt);
     div.innerHTML = word;
-    div.classList.add("popup", "active");
-    document.body.appendChild(div);
 
-    overlay.classList.add("active");
+    document.getElementById("fail").play();
   } else {
-    let div = document.createElement("div");
-    // let txt = document.createTextNode(`Game Over, the word is`);
     let word = `Congrats, you win! <br> the word is <div>${randomWordName}</div>`;
-
-    // div.appendChild(txt);
     div.innerHTML = word;
-    div.classList.add("popup", "active");
-    document.body.appendChild(div);
 
-    overlay.classList.add("active");
+    document.getElementById("success").play();
   }
+  btnReload.classList.add("btn-reload");
+  btnReload.setAttribute("onclick", "reloadPage()");
+  div.appendChild(btnReload);
+  div.classList.add("popup", "active");
+  document.body.appendChild(div);
+  overlay.classList.add("active");
 }
 
 overlay.addEventListener("click", () => {
@@ -173,4 +169,8 @@ function closePopup(popup) {
   if (popup == null) return;
   popup.classList.remove("active");
   overlay.classList.remove("active");
+}
+
+function reloadPage() {
+  location.reload();
 }
