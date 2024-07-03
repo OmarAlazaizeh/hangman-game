@@ -123,7 +123,7 @@ document.addEventListener("click", (e) => {
     }
     console.log(chosenWord.length);
     guessDivs.forEach((divBox) => {
-      if (divBox.innerHTML !== "") {
+      if (divBox.innerHTML !== "" || divBox.className === "with-space") {
         successAttempts++;
       }
     });
