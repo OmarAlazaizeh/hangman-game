@@ -1,0 +1,350 @@
+:root {
+  --draw-border-thickness: 4px solid #222;
+  --draw-thickness: 4px;
+  --draw-color: #222;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: "Tahoma", "Arial";
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.game-info {
+  display: flex;
+  align-items: center;
+}
+.game-info .game-name {
+  flex: 1;
+  font-size: 32px;
+  font-weight: bold;
+}
+.game-info .category {
+  flex: 1;
+  text-align: right;
+}
+.game-info .category span {
+  text-transform: capitalize;
+  color: #669bbc;
+  font-weight: bold;
+}
+
+hr {
+  border: 1px solid #eee;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+.row .hangman-draw {
+  flex: 1;
+  background-color: #f8f8f8;
+  padding: 20px;
+  height: 324px;
+  min-height: 365px;
+}
+.row .hangman-draw .the-draw {
+  width: 60px;
+  height: 280px;
+  border-bottom: var(--draw-border-thickness);
+  position: relative;
+  margin: auto;
+  left: -60px;
+  display: none;
+}
+.hangman-draw .stand {
+  display: none;
+}
+.hangman-draw .stand:before {
+  content: "";
+  width: var(--draw-thickness);
+  height: 100%;
+  background-color: var(--draw-color);
+  position: absolute;
+  left: 50%;
+  margin-left: -2px;
+}
+.hangman-draw .hang {
+  display: none;
+}
+.hangman-draw .hang:before {
+  content: "";
+  width: 100px;
+  height: var(--draw-thickness);
+  background-color: var(--draw-color);
+  position: absolute;
+  left: 30px;
+  top: 15px;
+}
+.hangman-draw .hang::after {
+  content: "";
+  width: 4px;
+
+  background-color: var(--draw-color);
+  position: absolute;
+
+  right: -30px;
+  height: 30px;
+  left: 130px;
+  top: 15px;
+}
+.hangman-draw .rop {
+  position: absolute;
+  border: 4px dashed #222;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  left: 99px;
+  top: 45px;
+  display: none;
+}
+.hangman-draw .man .head {
+  width: 56px;
+  height: 56px;
+  border: 4px solid #222;
+  border-radius: 50%;
+  position: absolute;
+  left: 106px;
+  top: 52px;
+  display: none;
+}
+.hangman-draw .man .body {
+  width: 4px;
+  height: 100px;
+  background-color: #222;
+  position: absolute;
+  left: 130px;
+  top: 104px;
+  display: none;
+}
+
+.hangman-draw .man .hands {
+  display: none;
+}
+.hangman-draw .man .hands::before,
+.hangman-draw .man .hands::after {
+  background: #222;
+  height: 40px;
+  width: 4px;
+  position: absolute;
+  content: "";
+}
+.hangman-draw .man .hands::before {
+  transform: rotate(45deg);
+  left: 116px;
+  top: 120px;
+}
+.hangman-draw .man .hands::after {
+  transform: rotate(-45deg);
+  left: 144px;
+  top: 120px;
+}
+
+.hangman-draw .man .legs {
+  display: none;
+}
+.hangman-draw .man .legs::before,
+.hangman-draw .man .legs::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 60px;
+  background: #222;
+}
+.hangman-draw .man .legs::before {
+  transform: rotate(35deg);
+  left: 113px;
+  top: 194px;
+}
+.hangman-draw .man .legs::after {
+  transform: rotate(-35deg);
+  left: 147px;
+  top: 194px;
+}
+
+.hangman-draw.wrong-1 .the-draw {
+  display: block;
+}
+.hangman-draw.wrong-2 .stand {
+  display: block;
+}
+.hangman-draw.wrong-3 .hang {
+  display: block;
+}
+.hangman-draw.wrong-4 .rop {
+  display: block;
+}
+.hangman-draw.wrong-5 .head {
+  display: block;
+}
+.hangman-draw.wrong-6 .body {
+  display: block;
+}
+.hangman-draw.wrong-7 .hands {
+  display: block;
+}
+.hangman-draw.wrong-8 .legs {
+  display: block;
+}
+
+.letters {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.letters.finished {
+  pointer-events: none;
+}
+.letters .letter-box {
+  font-size: 24px;
+  font-weight: bold;
+  background: #669bbc;
+  color: white;
+  display: inline-flex;
+  width: 55px;
+  height: 55px;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: center;
+  /* gap: 10px; */
+  /* margin: 0 10px 10px 0; */
+  cursor: pointer;
+  border-radius: 6px;
+}
+.letters .letter-box:hover {
+  background-color: #003049;
+}
+
+.letters .letter-box.clicked {
+  opacity: 0.2;
+  /* background-color: #003049; */
+  pointer-events: none;
+}
+
+.letters-guess {
+  background-color: #f8f8f8;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: fit-content;
+  margin: auto;
+}
+
+.letters-guess div {
+  width: 55px;
+  height: 55px;
+  background-color: white;
+  border: none;
+  border-bottom: 4px solid #222;
+  outline: none;
+  font-size: 30px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.letters-guess div.with-space {
+  position: relative;
+  border: none;
+  background: none;
+}
+.letters-guess div.with-space::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+}
+
+.popup {
+  position: fixed;
+  background-color: #003049;
+  padding: 100px 20px;
+  /* width: 80%; */
+  max-width: 80%;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 200ms ease-in-out;
+  text-align: center;
+  font-size: 40px;
+  /* border: 1px solid #ccc; */
+  color: #fff;
+  z-index: 10;
+  display: none;
+  border-radius: 10px;
+}
+.popup.active {
+  display: block;
+}
+
+.popup > div {
+  font-weight: bold;
+}
+
+#overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: 200ms ease-in-out;
+  pointer-events: none;
+  opacity: 0;
+}
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Start media quere */
+/* Small Screens */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium Screens */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large Screens */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* End media quere */
+
+@media (max-width: 991px) {
+  .row {
+    flex-direction: column;
+  }
+}

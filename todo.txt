@@ -1,0 +1,14 @@
+Create a butiful popup for the success:
+- Success state
+- Failur state
+==========================================
+Search for a json file contains many catigories and words and fetch it to the application
+==========================================
+Creat a dificulty system: 
+- 2 wrong attempts: Smart
+- 3 wrong attempts: Good
+- 4 wrong attempts: Accepted
+etc..
+Then, put it in the popup
+==========================================
+Replace the sound effects
